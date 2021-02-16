@@ -195,7 +195,7 @@ def main():
     args = parser.parse_args()
     
     url = args.url
-    url = urljoin(url, '/xmlrpc.php')
+    url = urljoin(url, 'xmlrpc.php')
 
     if args.input:
         userlist = open(args.input, 'r').read().split('\n')
