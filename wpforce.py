@@ -27,12 +27,6 @@ has_colours = has_colours(sys.stdout)
 BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
 
 
-def printout(text, colour=WHITE):
-        if has_colours:
-                seq = "\x1b[1;%dm" % (30+colour) + text + "\x1b[0m"
-                sys.stdout.write(seq)
-        else:
-                sys.stdout.write(text)
 
 
 def slice_list(input, size):
