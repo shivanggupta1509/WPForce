@@ -77,7 +77,7 @@ def BuildThreads(list_array,url,debug,userlist,verbose,agent):
 
 
 def PrintBanner(input,wordlist,url,userlist,passlist):
-    banner = """\
+    banner = ("""\
        ,-~~-.___.       __        __ ____   _____
       / |  x     \      \ \      / /|  _ \ |  ___|___   _ __  ___  ___
      (  )        0       \ \ /\ / / | |_) || |_  / _ \ | '__|/ __|/ _ \.
@@ -86,7 +86,7 @@ def PrintBanner(input,wordlist,url,userlist,passlist):
         /  \-'~;   ||     |                v.1.0.0
        /  __/~| ...||__/|-"   Brute Force Attack Tool for Wordpress
      =(  _____||________|                 ~n00py~
-    """
+    """)
     print banner
     print ("Username List: %s" % input) + " (" + str(len(userlist)) + ")"
     print ("Password List: %s" % wordlist) + " (" + str(len(passlist)) + ")"
